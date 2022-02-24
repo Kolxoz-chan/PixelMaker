@@ -1,5 +1,4 @@
-#include "canvaslayer.h"
-#include <iostream>
+#include "Canvas.h"
 
 Canvas::Canvas(QWidget *parent)
 {
@@ -10,6 +9,7 @@ Canvas::Canvas(QWidget *parent)
     QPixmap* layer = new QPixmap(this->size());
     layers.append(layer);
     this->repaint();
+    qDebug() << this->size();
 
     // Canvas settings
     this->setMouseTracking(true);

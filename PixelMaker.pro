@@ -9,14 +9,24 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    canvaslayer.cpp \
+    Editor.cpp \
+    Source/Canvas.cpp \
+    Source/Editor.cpp \
+    Source/Layer.cpp \
+    Source/Tool.cpp \
+    canvas.cpp \
+    layer.cpp \
     main.cpp \
-    mainwindow.cpp \
     tool.cpp
 
 HEADERS += \
-    canvaslayer.h \
-    mainwindow.h \
+    Editor.h \
+    Source/Canvas.h \
+    Source/Editor.h \
+    Source/Layer.h \
+    Source/Tool.h \
+    canvas.h \
+    layer.h \
     tool.h
 
 # Default rules for deployment.

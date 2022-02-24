@@ -1,4 +1,4 @@
-#include "tool.h"
+#include "Tool.h"
 
 Tool::Tool(QString name, QString description)
 {

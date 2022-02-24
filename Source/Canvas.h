@@ -1,10 +1,12 @@
-#ifndef CANVASLAYER_H
-#define CANVASLAYER_H
+#ifndef CANVAS_H
+#define CANVAS_H
 
 #include <QtCore/QtCore>
 #include <QtGui/QtGui>
 #include <QtWidgets/QtWidgets>
-#include "tool.h"
+
+#include "Tool.h"
+#include "Layer.h"
 
 class Canvas : public QWidget
 {
@@ -15,7 +17,7 @@ public:
 
 private:
 
-    QVector<QPixmap*> layers;
+    QVector<Layer*> layers;
     QMap<QString,Tool*> tools;
 
     QString current_tool;
@@ -38,4 +40,4 @@ signals:
 
 };
 
-#endif // CANVASLAYER_H
+#endif // CANVAS_H
