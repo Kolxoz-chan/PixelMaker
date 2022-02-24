@@ -12,15 +12,10 @@ class Canvas : public QWidget
 {
     Q_OBJECT
 
-public:
-    explicit Canvas(QWidget *parent = nullptr);
-
 private:
-
     QVector<Layer*> layers;
-    QMap<QString,Tool*> tools;
 
-    QString current_tool;
+    Tool* current_tool = nullptr;
     int current_layer = 0;
 
     void paintEvent(QPaintEvent* event) override;
@@ -28,13 +23,15 @@ private:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
 
-    QPixmap* getCurrentLayer();
+public:
+    explicit Canvas(QWidget *parent = nullptr);
+
+    Layer* getCurrentLayer();
     Tool* getCurrentTool();
 
-    void setCurrentTool(QString name);
+    void setCurrentTool(Tool* tool);
 
-    void addTool(QString name, Tool* tool);
-
+    void addLayer(Layer* layer);
 
 signals:
 

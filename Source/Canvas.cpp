@@ -2,45 +2,35 @@
 
 Canvas::Canvas(QWidget *parent)
 {
-    // Loading tools
-    this->addTool("pencil", new PencilTool());
-
-    // Create new layer
-    QPixmap* layer = new QPixmap(this->size());
-    layers.append(layer);
-    this->repaint();
-    qDebug() << this->size();
-
-    // Canvas settings
     this->setMouseTracking(true);
-    this->setCurrentTool("pencil");
 }
 
-QPixmap* Canvas::getCurrentLayer()
+Layer* Canvas::getCurrentLayer()
 {
     return layers[current_layer];
 }
 
 Tool* Canvas::getCurrentTool()
 {
-    return tools[current_tool];
+    return current_tool;
 }
 
-void Canvas::setCurrentTool(QString name)
+void Canvas::setCurrentTool(Tool* tool)
 {
-    current_tool = name;
-    tools[name]->setLayer(this->getCurrentLayer());
+    Layer* layer = this->getCurrentLayer();
+    current_tool = tool;
+    current_tool->setLayer(layer);
 }
 
-void Canvas::addTool(QString name, Tool* tool)
+void Canvas::addLayer(Layer* layer)
 {
-    tools[name] = tool;
+    layers.append(layer);
 }
 
 void Canvas::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
-    for(QPixmap* layer : layers)
+    for(Layer* layer : layers)
     {
         painter.drawPixmap(0, 0, *layer);
     }
@@ -49,20 +39,30 @@ void Canvas::paintEvent(QPaintEvent* event)
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
     Tool* tool = getCurrentTool();
-    tool->onMouseMove(event);
+    if(tool) tool->onMouseMove(event);
     repaint();
 }
 
 void Canvas::mousePressEvent(QMouseEvent *event)
 {
     Tool* tool = getCurrentTool();
-    tool->onMousePress(event);
+    if(tool) tool->onMousePress(event);
     repaint();
 }
 
 void Canvas::mouseReleaseEvent(QMouseEvent *event)
 {
     Tool* tool = getCurrentTool();
-    tool->onMouseRelease(event);
+    if(tool) tool->onMouseRelease(event);
     repaint();
+}
+
+void Canvas::keyPressEvent(QKeyEvent *event)
+{
+
+}
+
+void Canvas::keyReleaseEvent(QKeyEvent *event)
+{
+
 }

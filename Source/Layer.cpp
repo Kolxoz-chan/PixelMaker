@@ -1,6 +1,6 @@
 #include "Layer.h"
 
-Layer::Layer()
+Layer::Layer(QSize size) : QPixmap(size)
 {
 
 }

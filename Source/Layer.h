@@ -6,7 +6,8 @@
 class Layer : public QPixmap
 {
 public:
-    Layer();
+    Layer() = default;
+    Layer(QSize size);
 };
 
 #endif // LAYER_H
