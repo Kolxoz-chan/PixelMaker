@@ -50,9 +50,10 @@ private:
 public:
     FillTool();
 
-    QImage fillPixel(QImage img, QPoint pos);
     void onMousePress(QMouseEvent* event) override;
     void onMouseRelease(QMouseEvent* event) override;
+
+
 };
 
 #endif // TOOL_H
