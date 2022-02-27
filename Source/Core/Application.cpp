@@ -2,9 +2,11 @@
 
 #include "../Editor/Editor.h"
 #include "Tools.h"
+#include "Settings.h"
 
 Application::Application()
     : _tools(new Tools())
+    , _settings(new Settings())
 {
 }
 
@@ -27,4 +29,9 @@ Editor *Application::getEditor() const
 Tools *Application::getTools() const
 {
     return _tools;
+}
+
+Settings *Application::getSettings() const
+{
+    return _settings;
 }

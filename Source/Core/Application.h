@@ -3,6 +3,7 @@
 
 class Editor;
 class Tools;
+class Settings;
 
 class Application
 {
@@ -19,9 +20,12 @@ public:
 
     Tools* getTools() const;
 
+    Settings* getSettings() const;
+
 private:
     Editor* _editor = nullptr;
     Tools* _tools = nullptr;
+    Settings* _settings = nullptr;
 };
 
 #endif // APPLICATION_H

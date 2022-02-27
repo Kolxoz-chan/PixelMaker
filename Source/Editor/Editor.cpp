@@ -3,6 +3,7 @@
 #include "../Core/Canvas.h"
 #include "../Core/Application.h"
 #include "../Core/Tools.h"
+#include "../Core/Settings.h"
 
 #include "Menu.h"
 #include "Toolbar.h"
@@ -59,4 +60,31 @@ Canvas *Editor::getCanvas() const
 Toolbar *Editor::getToolbar() const
 {
     return _toolbar;
+}
+
+void Editor::keyPressEvent(QKeyEvent *event)
+{
+    Qt::Key key = static_cast<Qt::Key>(event->key());
+    auto keyboardAction = Application::getInstance().getSettings()->GetKeyboardAction(key);
+
+    switch (keyboardAction)
+    {
+    case SettingKeyboardActions::SetPencilTool:
+        SetCurrentTool(PENCIL_TOOL_NAME);
+        break;
+
+    case SettingKeyboardActions::SetFillTool:
+        SetCurrentTool(FILL_TOOL_NAME);
+        break;
+
+    case SettingKeyboardActions::NoAction:
+        break;
+    }
+}
+
+void Editor::SetCurrentTool(const QString &toolName)
+{
+    _canvas->setCurrentTool(Application::getInstance().getTools()->getTool(toolName));
+    _menu->setCurrentToolName(toolName);
+    _toolbar->setCurrentToolName(toolName);
 }
