@@ -24,6 +24,12 @@ public:
     Canvas* getCanvas() const;
     Toolbar* getToolbar() const;
 
+protected:
+    void keyPressEvent(QKeyEvent *event);
+
+private:
+    void SetCurrentTool(const QString& toolName);
+
 private:
     Canvas* _canvas = nullptr;
     Menu* _menu = nullptr;

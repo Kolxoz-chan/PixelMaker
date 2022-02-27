@@ -15,13 +15,13 @@ public:
 public:
     void init(const QString& currentToolName);
 
+    void setCurrentToolName(const QString& currentToolName);
+
 public slots:
     void onSelectTool();
 
 private:
     void initActions();
-
-    void setCurrentToolName(const QString& currentToolName);
 
     void onRedrawSelectToolsMenu();
 

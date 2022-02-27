@@ -22,6 +22,7 @@ HEADERS += \
     Source/Core/Application.h \
     Source/Core/Canvas.h \
     Source/Core/Layer.h \
+    Source/Core/Settings.h \
     Source/Core/Tool.h \
     Source/Core/Tools.h \
     Source/Editor/Editor.h \
@@ -32,6 +33,7 @@ SOURCES += \
     Source/Core/Application.cpp \
     Source/Core/Canvas.cpp \
     Source/Core/Layer.cpp \
+    Source/Core/Settings.cpp \
     Source/Core/Tool.cpp \
     Source/Core/Tools.cpp \
     Source/Editor/Editor.cpp \

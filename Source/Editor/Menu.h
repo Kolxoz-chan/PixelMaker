@@ -17,13 +17,13 @@ public:
 public:
     void init(const QString& currentToolName);
 
+    void setCurrentToolName(const QString& currentToolName);
+
 public slots:
     void onSelectTool();
 
 private:
     void initMenuBar();
-
-    void setCurrentToolName(const QString& currentToolName);
 
     void onRedrawSelectToolsMenu();
 
