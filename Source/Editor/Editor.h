@@ -38,6 +38,7 @@ private:
 private:
     static inline const QString PENCIL_TOOL_NAME = "pencil";
     static inline const QString FILL_TOOL_NAME = "fill";
+    static inline const QString ERASER_TOOL_NAME = "erase";
     static inline const QString DEFAULT_TOOL_NAME = PENCIL_TOOL_NAME;
 };
 

@@ -2,5 +2,5 @@
 
 Layer::Layer(QSize size) : QPixmap(size)
 {
-    this->fill();
+    this->fill(Qt::transparent);
 }

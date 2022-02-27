@@ -11,6 +11,28 @@ void Tool::setLayer(Layer* layer)
     this->layer = layer;
 }
 
+QMap<QString, QVariant> Tool::getProperties()
+{
+    return settings;
+}
+
+QVariant Tool::getProperty(QString name)
+{
+    return settings[name];
+}
+
+
+QString Tool::getName()
+{
+    return name;
+}
+
+void Tool::setProperty(QString name, QVariant value)
+{
+
+    settings[name] = value;
+}
+
 // ------------------ Pencil tool ----------------------- //
 PencilTool::PencilTool() : Tool("Pencil", "Simple pencil")
 {
@@ -115,4 +137,50 @@ void FillTool::onMousePress(QMouseEvent* event)
 void FillTool::onMouseRelease(QMouseEvent* event)
 {
     is_pressed = false;
+}
+
+// ---------------- Eraser tool -------------------- //
+EraserTool::EraserTool() : Tool("Eraser", "Simple eraser")
+{
+    settings["size"] = 10;
+}
+
+void EraserTool::onMouseMove(QMouseEvent* event)
+{
+    if(is_pressed)
+    {
+        QPoint pos = event->pos();
+        uint size = settings["size"].toUInt();
+
+        QBrush brush = QBrush(Qt::transparent);
+        QPen pen = QPen(brush, size);
+
+        QPainter painter(layer);
+        painter.setCompositionMode(QPainter::CompositionMode_Clear);
+        painter.setPen(pen);
+        painter.drawLine(last_point, pos);
+
+        last_point = pos;
+    }
+}
+
+void EraserTool::onMousePress(QMouseEvent* event)
+{
+    is_pressed = true;
+    last_point = event->pos();
+}
+
+void EraserTool::onMouseRelease(QMouseEvent* event)
+{
+    is_pressed = false;
+    QPoint pos = event->pos();
+    uint size = settings["size"].toUInt();
+
+    QBrush brush = QBrush(Qt::transparent);
+    QPen pen = QPen(brush, size);
+
+    QPainter painter(layer);
+    painter.setCompositionMode(QPainter::CompositionMode_Clear);
+    painter.setPen(pen);
+    painter.drawLine(last_point, pos);
 }

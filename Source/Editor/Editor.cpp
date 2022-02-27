@@ -36,6 +36,7 @@ void Editor::initTools()
 {
     Application::getInstance().getTools()->addTool(PENCIL_TOOL_NAME, new PencilTool());
     Application::getInstance().getTools()->addTool(FILL_TOOL_NAME, new FillTool());
+    Application::getInstance().getTools()->addTool(ERASER_TOOL_NAME, new EraserTool());
 }
 
 void Editor::initMenu()
