@@ -49,7 +49,7 @@ void Editor::initToolbar()
     _toolbar = new Toolbar("Toolbar", this);
     _toolbar->init(DEFAULT_TOOL_NAME);
 
-    addToolBar(Qt::ToolBarArea::TopToolBarArea, _toolbar);
+    addToolBar(Qt::ToolBarArea::LeftToolBarArea, _toolbar);
 }
 
 Canvas *Editor::getCanvas() const
