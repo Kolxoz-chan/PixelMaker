@@ -7,15 +7,13 @@ class Tools;
 class Application
 {
 public:
-    Application() = default;
+    Application();
     ~Application() = default;
 
 public:
     static Application& getInstance();
 
 public:
-    void init();
-
     void setEditor(Editor* editor);
     Editor* getEditor() const;
 

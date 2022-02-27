@@ -3,15 +3,15 @@
 #include "../Editor/Editor.h"
 #include "Tools.h"
 
+Application::Application()
+    : _tools(new Tools())
+{
+}
+
 Application &Application::getInstance()
 {
     static Application application;
     return application;
-}
-
-void Application::init()
-{
-    _tools = new Tools();
 }
 
 void Application::setEditor(Editor *editor)

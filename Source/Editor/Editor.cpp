@@ -5,10 +5,11 @@
 #include "../Core/Tools.h"
 
 #include "Menu.h"
+#include "Toolbar.h"
 
 Editor::Editor(QWidget *parent) : QMainWindow(parent)
 {
-    Application::getInstance().init();
+    // Init application sigleton
     Application::getInstance().setEditor(this);
 
     // Init widget settings
@@ -18,6 +19,7 @@ Editor::Editor(QWidget *parent) : QMainWindow(parent)
     this->initTools();
     this->initCanvas();
     this->initMenu();
+    this->initToolbar();
 }
 
 void Editor::initCanvas()
@@ -41,17 +43,20 @@ void Editor::initMenu()
     _menu->init(DEFAULT_TOOL_NAME);
 }
 
-void Editor::keyPressEvent(QKeyEvent *event)
+void Editor::initToolbar()
 {
-    switch(event->key())
-    {
-        case Qt::Key::Key_P: _canvas->setCurrentTool(Application::getInstance().getTools()->getTool(PENCIL_TOOL_NAME)); break;
-        case Qt::Key::Key_F: _canvas->setCurrentTool(Application::getInstance().getTools()->getTool(FILL_TOOL_NAME)); break;
+    _toolbar = new Toolbar("Toolbar", this);
+    _toolbar->init(DEFAULT_TOOL_NAME);
 
-    }
+    addToolBar(Qt::ToolBarArea::TopToolBarArea, _toolbar);
 }
 
 Canvas *Editor::getCanvas() const
 {
     return _canvas;
+}
+
+Toolbar *Editor::getToolbar() const
+{
+    return _toolbar;
 }

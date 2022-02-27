@@ -5,6 +5,7 @@
 
 class Canvas;
 class Menu;
+class Toolbar;
 
 class Editor : public QMainWindow
 {
@@ -18,14 +19,15 @@ public:
     void initCanvas();
     void initTools();
     void initMenu();
-
-    void keyPressEvent(QKeyEvent *event) override;
+    void initToolbar();
 
     Canvas* getCanvas() const;
+    Toolbar* getToolbar() const;
 
 private:
     Canvas* _canvas = nullptr;
     Menu* _menu = nullptr;
+    Toolbar* _toolbar = nullptr;
 
 private:
     static inline const QString PENCIL_TOOL_NAME = "pencil";

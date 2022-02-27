@@ -25,7 +25,8 @@ HEADERS += \
     Source/Core/Tool.h \
     Source/Core/Tools.h \
     Source/Editor/Editor.h \
-    Source/Editor/Menu.h
+    Source/Editor/Menu.h \
+    Source/Editor/Toolbar.h
 
 SOURCES += \
     Source/Core/Application.cpp \
@@ -35,4 +36,5 @@ SOURCES += \
     Source/Core/Tools.cpp \
     Source/Editor/Editor.cpp \
     Source/Editor/Menu.cpp \
+    Source/Editor/Toolbar.cpp \
     main.cpp
