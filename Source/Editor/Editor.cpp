@@ -15,17 +15,17 @@ Editor::Editor(QWidget *parent) : QMainWindow(parent)
     this->setFixedSize(640, 480);
 
     // Init data
-    this->initCanvas();
     this->initTools();
+    this->initCanvas();
     this->initMenu();
-
-    _canvas->addLayer(new Layer(_canvas->size()));
-    _canvas->setCurrentTool(Application::getInstance().getTools()->getTool(PENCIL_TOOL_NAME));
 }
 
 void Editor::initCanvas()
 {
     _canvas = new Canvas(this);
+    _canvas->addLayer(new Layer(_canvas->size()));
+    _canvas->setCurrentTool(Application::getInstance().getTools()->getTool(DEFAULT_TOOL_NAME));
+
     this->setCentralWidget(_canvas);
 }
 
@@ -38,7 +38,7 @@ void Editor::initTools()
 void Editor::initMenu()
 {
     _menu = new Menu();
-    _menu->init();
+    _menu->init(DEFAULT_TOOL_NAME);
 }
 
 void Editor::keyPressEvent(QKeyEvent *event)
