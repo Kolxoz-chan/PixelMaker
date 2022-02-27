@@ -3,8 +3,8 @@
 
 #include <QMainWindow>
 
-#include "Canvas.h"
-#include "Tool.h"
+#include "../Core/Canvas.h"
+#include "../Core/Tool.h"
 
 class Editor : public QMainWindow
 {

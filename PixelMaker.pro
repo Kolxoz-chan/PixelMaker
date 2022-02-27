@@ -8,20 +8,25 @@ CONFIG += c++11
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
-    Source/Canvas.cpp \
-    Source/Editor.cpp \
-    Source/Layer.cpp \
-    Source/Tool.cpp \
-    main.cpp
-
-HEADERS += \
-    Source/Canvas.h \
-    Source/Editor.h \
-    Source/Layer.h \
-    Source/Tool.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    .gitignore \
+    README.md
+
+HEADERS += \
+    Source/Core/Canvas.h \
+    Source/Core/Layer.h \
+    Source/Core/Tool.h \
+    Source/Editor/Editor.h
+
+SOURCES += \
+    Source/Core/Canvas.cpp \
+    Source/Core/Layer.cpp \
+    Source/Core/Tool.cpp \
+    Source/Editor/Editor.cpp \
+    main.cpp

@@ -1,4 +1,4 @@
-#include "Source/Editor.h"
+#include "Source/Editor/Editor.h"
 
 #include <QApplication>
 
