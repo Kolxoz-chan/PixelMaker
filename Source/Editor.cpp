@@ -18,6 +18,17 @@ Editor::Editor(QWidget *parent) : QMainWindow(parent)
 void Editor::initTools()
 {
     this->addTool("pencil", new PencilTool());
+    this->addTool("fill", new FillTool());
+}
+
+void Editor::keyPressEvent(QKeyEvent *event)
+{
+    switch(event->key())
+    {
+        case Qt::Key::Key_P: canvas->setCurrentTool(tools["pencil"]); break;
+        case Qt::Key::Key_F: canvas->setCurrentTool(tools["fill"]); break;
+
+    }
 }
 
 void Editor::addTool(QString name, Tool* tool)

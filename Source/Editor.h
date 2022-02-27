@@ -19,6 +19,7 @@ public:
     Editor(QWidget *parent = nullptr);
 
     void initTools();
+    void keyPressEvent(QKeyEvent *event) override;
 
     void addTool(QString name, Tool* tool);
 
