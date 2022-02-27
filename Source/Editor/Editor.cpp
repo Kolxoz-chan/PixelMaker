@@ -1,38 +1,57 @@
 #include "Editor.h"
 
+#include "../Core/Canvas.h"
+#include "../Core/Application.h"
+#include "../Core/Tools.h"
+
+#include "Menu.h"
+
 Editor::Editor(QWidget *parent) : QMainWindow(parent)
 {
+    Application::getInstance().init();
+    Application::getInstance().setEditor(this);
+
+    // Init widget settings
     this->setFixedSize(640, 480);
 
     // Init data
+    this->initCanvas();
     this->initTools();
+    this->initMenu();
 
-    // Canvas settings
-    canvas = new Canvas(this);
-    this->setCentralWidget(canvas);
+    _canvas->addLayer(new Layer(_canvas->size()));
+    _canvas->setCurrentTool(Application::getInstance().getTools()->getTool(PENCIL_TOOL_NAME));
+}
 
-    canvas->addLayer(new Layer(canvas->size()));
-    canvas->setCurrentTool(tools["pencil"]);
+void Editor::initCanvas()
+{
+    _canvas = new Canvas(this);
+    this->setCentralWidget(_canvas);
 }
 
 void Editor::initTools()
 {
-    this->addTool("pencil", new PencilTool());
-    this->addTool("fill", new FillTool());
+    Application::getInstance().getTools()->addTool(PENCIL_TOOL_NAME, new PencilTool());
+    Application::getInstance().getTools()->addTool(FILL_TOOL_NAME, new FillTool());
+}
+
+void Editor::initMenu()
+{
+    _menu = new Menu();
+    _menu->init();
 }
 
 void Editor::keyPressEvent(QKeyEvent *event)
 {
     switch(event->key())
     {
-        case Qt::Key::Key_P: canvas->setCurrentTool(tools["pencil"]); break;
-        case Qt::Key::Key_F: canvas->setCurrentTool(tools["fill"]); break;
+        case Qt::Key::Key_P: _canvas->setCurrentTool(Application::getInstance().getTools()->getTool(PENCIL_TOOL_NAME)); break;
+        case Qt::Key::Key_F: _canvas->setCurrentTool(Application::getInstance().getTools()->getTool(FILL_TOOL_NAME)); break;
 
     }
 }
 
-void Editor::addTool(QString name, Tool* tool)
+Canvas *Editor::getCanvas() const
 {
-    tools[name] = tool;
+    return _canvas;
 }
-

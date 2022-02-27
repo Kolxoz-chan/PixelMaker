@@ -3,26 +3,33 @@
 
 #include <QMainWindow>
 
-#include "../Core/Canvas.h"
-#include "../Core/Tool.h"
+class Canvas;
+class Menu;
 
 class Editor : public QMainWindow
 {
     Q_OBJECT
 
-private:
-    QMap<QString,Tool*> tools;
-    Canvas* canvas;
-
-
 public:
     Editor(QWidget *parent = nullptr);
+    ~Editor() = default;
 
+public:
+    void initCanvas();
     void initTools();
+    void initMenu();
+
     void keyPressEvent(QKeyEvent *event) override;
 
-    void addTool(QString name, Tool* tool);
+    Canvas* getCanvas() const;
 
-    ~Editor() = default;
+private:
+    Canvas* _canvas = nullptr;
+    Menu* _menu = nullptr;
+
+private:
+    static inline const QString PENCIL_TOOL_NAME = "pencil";
+    static inline const QString FILL_TOOL_NAME = "fill";
 };
+
 #endif // EDITOR_H
