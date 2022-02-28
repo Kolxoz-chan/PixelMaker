@@ -25,8 +25,8 @@ Editor::Editor(QWidget *parent) : QMainWindow(parent)
 
 void Editor::initCanvas()
 {
-    _canvas = new Canvas(this);
-    _canvas->addLayer(new Layer(_canvas->size()));
+    _canvas = new Canvas(QSize(200, 200));
+    _canvas->addLayer(new Layer(_canvas->getSize()));
     _canvas->setCurrentTool(Application::getInstance().getTools()->getFirstTool());
 
     this->setCentralWidget(_canvas);

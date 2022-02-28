@@ -15,6 +15,7 @@ class Tool
 protected:
     QString name;
     QString description;
+    QTransform* transform;
     Layer* layer, *aux_layer;
     QMap<QString, QVariant> properties;
     SettingKeyboardActions keyboardAction;
@@ -25,6 +26,8 @@ public:
     virtual void onMouseMove(QMouseEvent* event) {};
     virtual void onMousePress(QMouseEvent* event) {};
     virtual void onMouseRelease(QMouseEvent* event) {};
+    virtual void onKeyPress(QKeyEvent* event) {};
+    virtual void onKeyRelease(QKeyEvent* event) {};
     virtual void reset() {};
 
     QMap<QString, QVariant> getProperties();
@@ -33,6 +36,7 @@ public:
     SettingKeyboardActions getKeyboardAction() const;
 
     void setLayer(Layer* layer);
+    void setTransform(QTransform* trans);
     void setAuxLayer(Layer* layer);
     void setProperty(QString name, QVariant value);
 };
@@ -97,6 +101,7 @@ public:
     void onMousePress(QMouseEvent* event) override;
     void onMouseRelease(QMouseEvent* event) override;
     void onMouseMove(QMouseEvent* event) override;
+    void onKeyPress(QKeyEvent* event) override;
     void reset() override;
 
 };
