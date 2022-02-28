@@ -34,9 +34,9 @@ void Editor::initCanvas()
 
 void Editor::initTools()
 {
-    Application::getInstance().getTools()->addTool(PENCIL_TOOL_NAME, new PencilTool());
-    Application::getInstance().getTools()->addTool(FILL_TOOL_NAME, new FillTool());
-    Application::getInstance().getTools()->addTool(ERASER_TOOL_NAME, new EraserTool());
+    Application::getInstance().getTools()->addTool(new PencilTool());
+    Application::getInstance().getTools()->addTool(new FillTool());
+    Application::getInstance().getTools()->addTool(new EraserTool());
 }
 
 void Editor::initMenu()

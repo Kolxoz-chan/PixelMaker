@@ -4,7 +4,6 @@
 #include "../Core/Tool.h"
 
 #include <QString>
-#include <QMap>
 #include <QVector>
 
 class Tools
@@ -14,13 +13,13 @@ public:
     ~Tools() = default;
 
 public:
-    void addTool(const QString& key, Tool* tool);
+    void addTool(Tool* tool);
     Tool* getTool(const QString& key) const;
 
     QVector<QString> getToolNames() const;
 
 private:
-    QMap<QString,Tool*> _tools;
+    QVector<Tool*> _tools;
 };
 
 #endif // TOOLS_H

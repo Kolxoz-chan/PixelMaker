@@ -1,18 +1,20 @@
 #include "Tools.h"
 
-void Tools::addTool(const QString &key, Tool *tool)
+void Tools::addTool(Tool *tool)
 {
-    if (auto it = _tools.find(key); it == _tools.end())
-    {
-        _tools[key] = tool;
-    }
+    // TODO: Добавить проверку "Существует ли инструмент"
+    // для того, чтобы случайно не добавить 2 инструмента
+    _tools.push_back(tool);
 }
 
 Tool *Tools::getTool(const QString &key) const
 {
-    if (auto it = _tools.find(key); it != _tools.end())
+    for (const auto& tool : _tools)
     {
-        return it.value();
+        if (tool->getName() == key)
+        {
+            return tool;
+        }
     }
 
     return nullptr;
@@ -22,9 +24,9 @@ QVector<QString> Tools::getToolNames() const
 {
     QVector<QString> toolNames;
 
-    for (auto it = _tools.begin(); it != _tools.end(); ++it)
+    for (const auto& tool : _tools)
     {
-        toolNames.push_back(it.key());
+        toolNames.push_back(tool->getName());
     }
 
     return toolNames;

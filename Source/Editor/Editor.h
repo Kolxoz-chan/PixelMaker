@@ -36,9 +36,9 @@ private:
     Toolbar* _toolbar = nullptr;
 
 private:
-    static inline const QString PENCIL_TOOL_NAME = "pencil";
-    static inline const QString FILL_TOOL_NAME = "fill";
-    static inline const QString ERASER_TOOL_NAME = "erase";
+    static inline const QString PENCIL_TOOL_NAME = "Pencil";
+    static inline const QString FILL_TOOL_NAME = "F";
+    static inline const QString ERASER_TOOL_NAME = "Eraser";
     static inline const QString DEFAULT_TOOL_NAME = PENCIL_TOOL_NAME;
 };
 
