@@ -5,6 +5,7 @@ Settings::Settings()
     SetKeyboardAction(Qt::Key::Key_P, SettingKeyboardActions::SetPencilTool);
     SetKeyboardAction(Qt::Key::Key_F, SettingKeyboardActions::SetFillTool);
     SetKeyboardAction(Qt::Key::Key_E, SettingKeyboardActions::SetEraserTool);
+    SetKeyboardAction(Qt::Key::Key_G, SettingKeyboardActions::SetPolygonTool);
 }
 
 void Settings::SetKeyboardAction(Qt::Key key, SettingKeyboardActions keyboardAction)

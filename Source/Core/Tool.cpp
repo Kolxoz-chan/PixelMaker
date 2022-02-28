@@ -1,9 +1,12 @@
 #include "Tool.h"
 
-Tool::Tool(QString name, QString description)
+#include "Settings.h"
+
+Tool::Tool(QString name, QString description, SettingKeyboardActions keyboardAction)
 {
     this->name = name;
     this->description = description;
+    this->keyboardAction = keyboardAction;
 }
 
 void Tool::setLayer(Layer* layer)
@@ -27,6 +30,11 @@ QString Tool::getName()
     return name;
 }
 
+SettingKeyboardActions Tool::getKeyboardAction() const
+{
+    return keyboardAction;
+}
+
 void Tool::setProperty(QString name, QVariant value)
 {
 
@@ -34,7 +42,7 @@ void Tool::setProperty(QString name, QVariant value)
 }
 
 // ------------------ Pencil tool ----------------------- //
-PencilTool::PencilTool() : Tool("Pencil", "Simple pencil")
+PencilTool::PencilTool() : Tool("Pencil", "Simple pencil", SettingKeyboardActions::SetPencilTool)
 {
 
 }
@@ -76,7 +84,7 @@ void PencilTool::onMouseRelease(QMouseEvent* event)
 }
 
 // ---------------- Fill tool -------------------- //
-FillTool::FillTool() : Tool("Fill", "Simple pencil")
+FillTool::FillTool() : Tool("Fill", "Simple pencil", SettingKeyboardActions::SetFillTool)
 {
     properties["color"] = QColor(0,0,0);
 }
@@ -140,7 +148,7 @@ void FillTool::onMouseRelease(QMouseEvent* event)
 }
 
 // ---------------- Eraser tool -------------------- //
-EraserTool::EraserTool() : Tool("Eraser", "Simple eraser")
+EraserTool::EraserTool() : Tool("Eraser", "Simple eraser", SettingKeyboardActions::SetEraserTool)
 {
     properties["size"] = 10;
 }
@@ -186,7 +194,7 @@ void EraserTool::onMouseRelease(QMouseEvent* event)
 }
 
 // ---------------- Polygon tool -------------------- //
-PolygonTool::PolygonTool() : Tool("Polygon", "Simple polygon")
+PolygonTool::PolygonTool() : Tool("Polygon", "Simple polygon", SettingKeyboardActions::SetPolygonTool)
 {
     properties["size"] = 2;
     properties["color"] = QColor(0, 0, 0);

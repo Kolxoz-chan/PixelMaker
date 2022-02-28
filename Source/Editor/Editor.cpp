@@ -27,7 +27,7 @@ void Editor::initCanvas()
 {
     _canvas = new Canvas(this);
     _canvas->addLayer(new Layer(_canvas->size()));
-    _canvas->setCurrentTool(Application::getInstance().getTools()->getTool(DEFAULT_TOOL_NAME));
+    _canvas->setCurrentTool(Application::getInstance().getTools()->getFirstTool());
 
     this->setCentralWidget(_canvas);
 }
@@ -43,13 +43,13 @@ void Editor::initTools()
 void Editor::initMenu()
 {
     _menu = new Menu();
-    _menu->init(DEFAULT_TOOL_NAME);
+    _menu->init(_canvas->getCurrentTool()->getName());
 }
 
 void Editor::initToolbar()
 {
     _toolbar = new Toolbar("Toolbar", this);
-    _toolbar->init(DEFAULT_TOOL_NAME);
+    _toolbar->init(_canvas->getCurrentTool()->getName());
 
     addToolBar(Qt::ToolBarArea::LeftToolBarArea, _toolbar);
 }
@@ -69,28 +69,20 @@ void Editor::keyPressEvent(QKeyEvent *event)
     Qt::Key key = static_cast<Qt::Key>(event->key());
     auto keyboardAction = Application::getInstance().getSettings()->GetKeyboardAction(key);
 
-    switch (keyboardAction)
+    if (keyboardAction == SettingKeyboardActions::NoAction)
     {
-    case SettingKeyboardActions::SetPencilTool:
-        setCurrentTool(PENCIL_TOOL_NAME);
-        break;
+        return;
+    }
 
-    case SettingKeyboardActions::SetFillTool:
-        setCurrentTool(FILL_TOOL_NAME);
-        break;
-
-    case SettingKeyboardActions::SetEraserTool:
-        setCurrentTool(ERASER_TOOL_NAME);
-        break;
-
-    case SettingKeyboardActions::NoAction:
-        break;
+    if (auto tool = Application::getInstance().getTools()->getToolFromKeyboardAction(keyboardAction))
+    {
+        setCurrentTool(tool);
     }
 }
 
-void Editor::setCurrentTool(const QString &toolName)
+void Editor::setCurrentTool(Tool* tool)
 {
-    _canvas->setCurrentTool(Application::getInstance().getTools()->getTool(toolName));
-    _menu->setCurrentToolName(toolName);
-    _toolbar->setCurrentToolName(toolName);
+    _canvas->setCurrentTool(tool);
+    _menu->setCurrentToolName(tool->getName());
+    _toolbar->setCurrentToolName(tool->getName());
 }

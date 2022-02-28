@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "../Core/Tool.h"
+
 class Canvas;
 class Menu;
 class Toolbar;
@@ -28,18 +30,12 @@ private:
     void initMenu();
     void initToolbar();
 
-    void setCurrentTool(const QString& toolName);
+    void setCurrentTool(Tool* tool);
 
 private:
     Canvas* _canvas = nullptr;
     Menu* _menu = nullptr;
     Toolbar* _toolbar = nullptr;
-
-private:
-    static inline const QString PENCIL_TOOL_NAME = "Pencil";
-    static inline const QString FILL_TOOL_NAME = "F";
-    static inline const QString ERASER_TOOL_NAME = "Eraser";
-    static inline const QString DEFAULT_TOOL_NAME = PENCIL_TOOL_NAME;
 };
 
 #endif // EDITOR_H

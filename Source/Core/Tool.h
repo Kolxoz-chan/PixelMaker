@@ -7,6 +7,8 @@
 
 #include "Layer.h"
 
+enum class SettingKeyboardActions;
+
 // ---------------- Base tool ----------------------- //
 class Tool
 {
@@ -15,9 +17,10 @@ protected:
     QString description;
     Layer* layer;
     QMap<QString, QVariant> properties;
+    SettingKeyboardActions keyboardAction;
 
 public:
-    Tool(QString name, QString description);
+    Tool(QString name, QString description, SettingKeyboardActions keyboardAction);
 
     virtual void onMouseMove(QMouseEvent* event) {};
     virtual void onMousePress(QMouseEvent* event) {};
@@ -26,6 +29,7 @@ public:
     QMap<QString, QVariant> getProperties();
     QVariant getProperty(QString name);
     QString getName();
+    SettingKeyboardActions getKeyboardAction() const;
 
     void setLayer(Layer* layer);
     void setProperty(QString name, QVariant value);

@@ -6,6 +6,8 @@
 #include <QString>
 #include <QVector>
 
+enum class SettingKeyboardActions;
+
 class Tools
 {
 public:
@@ -15,6 +17,8 @@ public:
 public:
     void addTool(Tool* tool);
     Tool* getTool(const QString& key) const;
+    Tool* getFirstTool() const;
+    Tool* getToolFromKeyboardAction(SettingKeyboardActions keyboardAction) const;
 
     QVector<QString> getToolNames() const;
 
