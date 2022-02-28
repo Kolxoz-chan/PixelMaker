@@ -13,6 +13,7 @@ class Canvas : public QWidget
     Q_OBJECT
 
 private:
+    Layer* aux_layer = nullptr;
     QVector<Layer*> layers;
 
     Tool* current_tool = nullptr;

@@ -14,6 +14,11 @@ void Tool::setLayer(Layer* layer)
     this->layer = layer;
 }
 
+void Tool::setAuxLayer(Layer* layer)
+{
+    aux_layer = layer;
+}
+
 QMap<QString, QVariant> Tool::getProperties()
 {
     return properties;
@@ -202,7 +207,6 @@ PolygonTool::PolygonTool() : Tool("Polygon", "Simple polygon", SettingKeyboardAc
 
 void PolygonTool::onMousePress(QMouseEvent* event)
 {
-    qDebug() << 123;
     if(!is_pressed)
     {
         is_pressed = true;
@@ -228,3 +232,29 @@ void PolygonTool::onMouseRelease(QMouseEvent* event)
 {
     is_pressed = false;
 }
+
+void PolygonTool::onMouseMove(QMouseEvent* event)
+{
+    if(!last_point.isNull())
+    {
+        uint size = properties["size"].toUInt();
+        QColor color = properties["color"].value<QColor>();
+        QPoint pos = event->pos();
+
+        aux_layer->fill(Qt::transparent);
+
+        QBrush brush = QBrush(color);
+        QPen pen = QPen(brush, size);
+
+        QPainter painter(aux_layer);
+        painter.setPen(pen);
+        painter.drawLine(last_point, pos);
+    }
+}
+
+void PolygonTool::reset()
+{
+    last_point = QPoint();
+    aux_layer->fill(Qt::transparent);
+}
+

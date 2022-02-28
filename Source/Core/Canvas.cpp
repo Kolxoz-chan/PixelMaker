@@ -3,6 +3,7 @@
 Canvas::Canvas(QWidget *parent)
 {
     this->setMouseTracking(true);
+    aux_layer = new Layer(this->size());
 }
 
 Layer* Canvas::getCurrentLayer()
@@ -18,8 +19,14 @@ Tool* Canvas::getCurrentTool()
 void Canvas::setCurrentTool(Tool* tool)
 {
     Layer* layer = this->getCurrentLayer();
+
+    // Reset prew tool
+    if(current_tool) current_tool->reset();
+
     current_tool = tool;
     current_tool->setLayer(layer);
+    current_tool->setAuxLayer(aux_layer);
+    current_tool->reset();
 }
 
 void Canvas::addLayer(Layer* layer)
@@ -30,9 +37,14 @@ void Canvas::addLayer(Layer* layer)
 void Canvas::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
+    Layer* current_layer = getCurrentLayer();
     for(Layer* layer : layers)
     {
         painter.drawPixmap(0, 0, *layer);
+        if(layer == current_layer)
+        {
+            painter.drawPixmap(0, 0, *aux_layer);
+        }
     }
 }
 
