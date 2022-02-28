@@ -71,11 +71,15 @@ void Editor::keyPressEvent(QKeyEvent *event)
     switch (keyboardAction)
     {
     case SettingKeyboardActions::SetPencilTool:
-        SetCurrentTool(PENCIL_TOOL_NAME);
+        setCurrentTool(PENCIL_TOOL_NAME);
         break;
 
     case SettingKeyboardActions::SetFillTool:
-        SetCurrentTool(FILL_TOOL_NAME);
+        setCurrentTool(FILL_TOOL_NAME);
+        break;
+
+    case SettingKeyboardActions::SetEraserTool:
+        setCurrentTool(ERASER_TOOL_NAME);
         break;
 
     case SettingKeyboardActions::NoAction:
@@ -83,7 +87,7 @@ void Editor::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void Editor::SetCurrentTool(const QString &toolName)
+void Editor::setCurrentTool(const QString &toolName)
 {
     _canvas->setCurrentTool(Application::getInstance().getTools()->getTool(toolName));
     _menu->setCurrentToolName(toolName);

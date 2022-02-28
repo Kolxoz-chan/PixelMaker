@@ -9,7 +9,8 @@ enum struct SettingKeyboardActions
 {
     NoAction,
     SetPencilTool,
-    SetFillTool
+    SetFillTool,
+    SetEraserTool
 };
 
 class Settings

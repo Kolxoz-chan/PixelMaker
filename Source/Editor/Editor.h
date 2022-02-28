@@ -16,11 +16,6 @@ public:
     ~Editor() = default;
 
 public:
-    void initCanvas();
-    void initTools();
-    void initMenu();
-    void initToolbar();
-
     Canvas* getCanvas() const;
     Toolbar* getToolbar() const;
 
@@ -28,7 +23,12 @@ protected:
     void keyPressEvent(QKeyEvent *event);
 
 private:
-    void SetCurrentTool(const QString& toolName);
+    void initCanvas();
+    void initTools();
+    void initMenu();
+    void initToolbar();
+
+    void setCurrentTool(const QString& toolName);
 
 private:
     Canvas* _canvas = nullptr;
