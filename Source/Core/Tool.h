@@ -77,4 +77,21 @@ public:
 
 };
 
+// ---------------- Fill tool -------------------- //
+class PolygonTool : public Tool
+{
+private:
+    bool is_pressed = false;
+    QPoint last_point;
+
+
+public:
+    PolygonTool();
+
+    void onMouseMove(QMouseEvent* event) override;
+    void onMouseRelease(QMouseEvent* event) override;
+
+
+};
+
 #endif // TOOL_H

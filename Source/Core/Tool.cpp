@@ -76,7 +76,7 @@ void PencilTool::onMouseRelease(QMouseEvent* event)
 }
 
 // ---------------- Fill tool -------------------- //
-FillTool::FillTool() : Tool("F", "Simple pencil")
+FillTool::FillTool() : Tool("Fill", "Simple pencil")
 {
     settings["color"] = QColor(0,0,0);
 }
@@ -183,4 +183,39 @@ void EraserTool::onMouseRelease(QMouseEvent* event)
     painter.setCompositionMode(QPainter::CompositionMode_Clear);
     painter.setPen(pen);
     painter.drawLine(last_point, pos);
+}
+
+// ---------------- Polygon tool -------------------- //
+PolygonTool::PolygonTool() : Tool("Polygon", "Simple polygon")
+{
+    settings["size"] = 2;
+    settings["color"] = QColor(0, 0, 0);
+}
+
+void PolygonTool::onMouseMove(QMouseEvent* event)
+{
+    if(!is_pressed)
+    {
+        is_pressed = true;
+        QPoint pos = event->pos();
+
+        if(!last_point.isNull())
+        {
+            uint size = settings["size"].toUInt();
+            QColor color = settings["color"].value<QColor>();
+
+            QBrush brush = QBrush(color);
+            QPen pen = QPen(brush, size);
+
+            QPainter painter(layer);
+            painter.setPen(pen);
+            painter.drawLine(last_point, pos);
+        }
+        last_point = pos;
+    }
+}
+
+void PolygonTool::onMouseRelease(QMouseEvent* event)
+{
+    is_pressed = false;
 }
