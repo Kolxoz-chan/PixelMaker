@@ -14,7 +14,7 @@ protected:
     QString name;
     QString description;
     Layer* layer;
-    QMap<QString, QVariant> settings;
+    QMap<QString, QVariant> properties;
 
 public:
     Tool(QString name, QString description);
@@ -88,9 +88,8 @@ private:
 public:
     PolygonTool();
 
-    void onMouseMove(QMouseEvent* event) override;
+    void onMousePress(QMouseEvent* event) override;
     void onMouseRelease(QMouseEvent* event) override;
-
 
 };
 

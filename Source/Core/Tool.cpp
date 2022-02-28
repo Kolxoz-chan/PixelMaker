@@ -13,12 +13,12 @@ void Tool::setLayer(Layer* layer)
 
 QMap<QString, QVariant> Tool::getProperties()
 {
-    return settings;
+    return properties;
 }
 
 QVariant Tool::getProperty(QString name)
 {
-    return settings[name];
+    return properties[name];
 }
 
 
@@ -30,7 +30,7 @@ QString Tool::getName()
 void Tool::setProperty(QString name, QVariant value)
 {
 
-    settings[name] = value;
+    properties[name] = value;
 }
 
 // ------------------ Pencil tool ----------------------- //
@@ -78,7 +78,7 @@ void PencilTool::onMouseRelease(QMouseEvent* event)
 // ---------------- Fill tool -------------------- //
 FillTool::FillTool() : Tool("Fill", "Simple pencil")
 {
-    settings["color"] = QColor(0,0,0);
+    properties["color"] = QColor(0,0,0);
 }
 
 bool canFill(const QImage& img, const QPoint& pos, const QColor& color, const QColor& new_color)
@@ -97,7 +97,7 @@ void FillTool::onMousePress(QMouseEvent* event)
 
         QImage img = layer->toImage();
         QPoint pos = event->pos();
-        QColor new_color = settings["color"].value<QColor>();
+        QColor new_color = properties["color"].value<QColor>();
         QList<QPoint> list = {pos};
         QColor color = img.pixelColor(pos);
 
@@ -142,7 +142,7 @@ void FillTool::onMouseRelease(QMouseEvent* event)
 // ---------------- Eraser tool -------------------- //
 EraserTool::EraserTool() : Tool("Eraser", "Simple eraser")
 {
-    settings["size"] = 10;
+    properties["size"] = 10;
 }
 
 void EraserTool::onMouseMove(QMouseEvent* event)
@@ -150,7 +150,7 @@ void EraserTool::onMouseMove(QMouseEvent* event)
     if(is_pressed)
     {
         QPoint pos = event->pos();
-        uint size = settings["size"].toUInt();
+        uint size = properties["size"].toUInt();
 
         QBrush brush = QBrush(Qt::transparent);
         QPen pen = QPen(brush, size);
@@ -174,7 +174,7 @@ void EraserTool::onMouseRelease(QMouseEvent* event)
 {
     is_pressed = false;
     QPoint pos = event->pos();
-    uint size = settings["size"].toUInt();
+    uint size = properties["size"].toUInt();
 
     QBrush brush = QBrush(Qt::transparent);
     QPen pen = QPen(brush, size);
@@ -188,12 +188,13 @@ void EraserTool::onMouseRelease(QMouseEvent* event)
 // ---------------- Polygon tool -------------------- //
 PolygonTool::PolygonTool() : Tool("Polygon", "Simple polygon")
 {
-    settings["size"] = 2;
-    settings["color"] = QColor(0, 0, 0);
+    properties["size"] = 2;
+    properties["color"] = QColor(0, 0, 0);
 }
 
-void PolygonTool::onMouseMove(QMouseEvent* event)
+void PolygonTool::onMousePress(QMouseEvent* event)
 {
+    qDebug() << 123;
     if(!is_pressed)
     {
         is_pressed = true;
@@ -201,8 +202,8 @@ void PolygonTool::onMouseMove(QMouseEvent* event)
 
         if(!last_point.isNull())
         {
-            uint size = settings["size"].toUInt();
-            QColor color = settings["color"].value<QColor>();
+            uint size = properties["size"].toUInt();
+            QColor color = properties["color"].value<QColor>();
 
             QBrush brush = QBrush(color);
             QPen pen = QPen(brush, size);
